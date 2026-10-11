@@ -160,6 +160,9 @@ export default function DateInvite() {
                 <span>minuta</span>
               </label>
             </div>
+            <p className={styles.hint}>
+              Jak nie wiesz jeszcze o której, wybierz cokolwiek. Dogadamy.
+            </p>
           </>
         )}
 

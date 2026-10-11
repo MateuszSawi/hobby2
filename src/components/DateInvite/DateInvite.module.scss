@@ -221,6 +221,13 @@
   }
 }
 
+.hint {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: $color-text-muted;
+  max-width: 32ch;
+}
+
 .closing {
   font-size: 1.2rem;
   color: $color-text-muted;

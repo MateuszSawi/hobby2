@@ -23,7 +23,7 @@ zapisywac i usuwac (aplikacja nie ma logowania).
 
 - /            - zaproszenie (slajdy). W bazie jest zawsze jeden wiersz o stalym id,
                  nadpisywany po kazdym kroku. "Zacznij od nowa" (tylko do testow) czysci tabele.
-- /admin       - podsumowanie wyborow + tabela wierszy, usuwanie i "Wyczysc wszystko".
+- /admin       - jej wybory wypisane pod sobą + przycisk "Wyczyść" (zaczyna od zera).
 
 ## Struktura
 
@@ -31,7 +31,7 @@ zapisywac i usuwac (aplikacja nie ma logowania).
       app/
         layout.js                 # fonty Google (Cormorant Garamond, Parisienne), globals.scss
         page.js                   # strona glowna -> DateInvite
-        admin/                    # podsumowanie wyborow, czyszczenie (server actions)
+        admin/                    # lista wyborow + czyszczenie (server action)
       components/DateInvite/      # logika slajdow + style
       lib/supabase/client.js      # klient do komponentow 'use client'
       lib/supabase/server.js      # klient do Server Components / Actions

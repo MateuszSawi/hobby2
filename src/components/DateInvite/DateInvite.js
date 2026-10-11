@@ -16,7 +16,7 @@ const VIBES = [
 ];
 
 const PLACE_OPTION =
-  'Nie powiem Ci. To Twoje zadanie zaplanować randkę, i lepiej się kurwa postaraj.';
+  'Nie powiem Ci. To Twoje zadanie zaplanować randkę i lepiej się kurwa postaraj.';
 
 // W bazie jest zawsze jeden wiersz o stałym id - każdy zapis go nadpisuje.
 const RESPONSE_ID = '00000000-0000-0000-0000-000000000001';
@@ -59,6 +59,8 @@ export default function DateInvite() {
     setSaveError(null);
     try {
       const supabase = createClient();
+      // Gwarancja jednego wiersza: usuń wszystko poza stałym id, potem nadpisz.
+      await supabase.from('date_responses').delete().neq('id', RESPONSE_ID);
       const { error } = await supabase.from('date_responses').upsert({
         id: RESPONSE_ID,
         day,
@@ -224,12 +226,8 @@ export default function DateInvite() {
 
         {step === 6 && (
           <>
-            <h1 className={styles.title}>
-              Do zobaczenia
-              <br />
-              <span className={styles.when}>
-                {dayLabel} o {timeValue}
-              </span>
+            <h1 className={styles.when}>
+              {dayLabel} o {timeValue}.
             </h1>
             <p className={styles.closing}>Napisz mi, skąd Cię odebrać.</p>
           </>

@@ -83,31 +83,6 @@ export default function DateInvite() {
     setStep((s) => Math.min(s + 1, TOTAL_STEPS));
   }
 
-  function back() {
-    setStep((s) => Math.max(s - 1, 1));
-  }
-
-  // Tylko do testów: czyści tabelę, żeby zawsze był co najwyżej jeden wiersz.
-  async function restart() {
-    setSaveError(null);
-    try {
-      const supabase = createClient();
-      const { error } = await supabase
-        .from('date_responses')
-        .delete()
-        .not('id', 'is', null);
-      if (error) throw error;
-    } catch (err) {
-      setSaveError(err?.message || 'Nie udało się wyczyścić.');
-    }
-    setDay(null);
-    setHour('');
-    setMinute('');
-    setVibe(null);
-    setPlace(null);
-    setStep(1);
-  }
-
   const hourValid = hour !== '' && Number(hour) >= 0 && Number(hour) <= 23;
   const minuteValid =
     minute !== '' && Number(minute) >= 0 && Number(minute) <= 59;
@@ -247,14 +222,7 @@ export default function DateInvite() {
       )}
 
       {step >= FIRST_QUESTION && step <= LAST_QUESTION && (
-        <div className={styles.actions}>
-          {step > FIRST_QUESTION ? (
-            <button type="button" className={styles.linkButton} onClick={back}>
-              wstecz
-            </button>
-          ) : (
-            <span />
-          )}
+        <div className={styles.actionsEnd}>
           <button
             type="button"
             className={styles.primary}
@@ -262,14 +230,6 @@ export default function DateInvite() {
             onClick={() => next(step === LAST_QUESTION)}
           >
             {saving ? 'Zapisuję…' : step === LAST_QUESTION ? 'Gotowe' : 'Dalej'}
-          </button>
-        </div>
-      )}
-
-      {step === TOTAL_STEPS && (
-        <div className={styles.actionsEnd}>
-          <button type="button" className={styles.linkButton} onClick={restart}>
-            zacznij od nowa
           </button>
         </div>
       )}

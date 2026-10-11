@@ -226,13 +226,6 @@
   color: $color-text-muted;
 }
 
-.actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: $space-lg;
-}
-
 .actionsEnd {
   display: flex;
   justify-content: center;
@@ -258,16 +251,6 @@
   &:disabled {
     opacity: 0.45;
     cursor: not-allowed;
-  }
-}
-
-.linkButton {
-  color: $color-text-muted;
-  font-size: 0.95rem;
-  padding: 0.4rem 0;
-
-  &:hover {
-    color: $color-text;
   }
 }
 

@@ -22,7 +22,7 @@ zapisywac i usuwac (aplikacja nie ma logowania).
 ## Strony
 
 - /            - zaproszenie (slajdy). W bazie jest zawsze jeden wiersz o stalym id,
-                 nadpisywany po kazdym kroku. "Zacznij od nowa" (tylko do testow) czysci tabele.
+                 nadpisywany po kazdym kroku. Czyszczenie tylko z /admin.
 - /admin       - jej wybory wypisane pod sobą + przycisk "Wyczyść" (zaczyna od zera).
 
 ## Struktura

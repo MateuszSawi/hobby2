@@ -15,9 +15,30 @@ const body = Lora({
   display: 'swap',
 });
 
+// Adres produkcyjny potrzebny do absolutnych linków w podglądzie (OG).
+// Na Vercelu wykrywany automatycznie; w innym hostingu ustaw NEXT_PUBLIC_SITE_URL.
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL &&
+    `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`) ||
+  'http://localhost:3000';
+
 export const metadata = {
+  metadataBase: new URL(siteUrl),
   title: '????',
   description: 'Małe zaproszenie.',
+  openGraph: {
+    title: '????',
+    description: 'Małe zaproszenie.',
+    type: 'website',
+    images: [{ url: '/og.jpg', width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '????',
+    description: 'Małe zaproszenie.',
+    images: ['/og.jpg'],
+  },
 };
 
 export default function RootLayout({ children }) {

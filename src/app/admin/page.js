@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server';
 import { clearAll } from './actions';
+import styles from './page.module.scss';
 
 export const dynamic = 'force-dynamic';
 
@@ -29,12 +30,19 @@ export default async function AdminPage() {
     : [];
 
   return (
-    <main style={{ padding: '2rem 1rem' }}>
+    <main className={styles.main}>
       {choices.map(
-        (value, i) => value && <p key={i}>{value}</p>
+        (value, i) =>
+          value && (
+            <p key={i} className={styles.choice}>
+              {value}
+            </p>
+          )
       )}
-      <form action={clearAll} style={{ marginTop: '2rem' }}>
-        <button type="submit">Wyczyść</button>
+      <form action={clearAll}>
+        <button type="submit" className={styles.clear}>
+          Wyczyść
+        </button>
       </form>
     </main>
   );

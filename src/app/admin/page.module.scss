@@ -1,0 +1,29 @@
+@use 'variables' as *;
+
+.main {
+  padding: $space-lg $space-md;
+  max-width: 640px;
+}
+
+.choice {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.clear {
+  margin-top: $space-lg;
+  padding: 0.65rem 1.6rem;
+  border: 1px solid $color-accent;
+  border-radius: $radius;
+  background: $color-accent;
+  color: $color-surface;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  transition: background $transition, border-color $transition;
+
+  &:hover {
+    background: $color-accent-hover;
+    border-color: $color-accent-hover;
+  }
+}

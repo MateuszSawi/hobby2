@@ -30,13 +30,20 @@ function pad(value) {
   return String(value).padStart(2, '0');
 }
 
-export default function DateInvite() {
-  const [step, setStep] = useState(1);
-  const [day, setDay] = useState(null);
-  const [hour, setHour] = useState('');
-  const [minute, setMinute] = useState('');
-  const [vibe, setVibe] = useState(null);
-  const [place, setPlace] = useState(null);
+/**
+ * `initial` to ukończona odpowiedź z bazy (lub null). Gdy jest, od razu
+ * pokazujemy podsumowanie i nie da się przejść slajdów ponownie.
+ */
+export default function DateInvite({ initial = null }) {
+  const done = Boolean(initial?.completed);
+  const [initHour, initMinute] = initial?.time ? initial.time.split(':') : ['', ''];
+
+  const [step, setStep] = useState(done ? TOTAL_STEPS : 1);
+  const [day, setDay] = useState(done ? initial.day : null);
+  const [hour, setHour] = useState(done ? initHour : '');
+  const [minute, setMinute] = useState(done ? initMinute : '');
+  const [vibe, setVibe] = useState(done ? initial.vibe : null);
+  const [place, setPlace] = useState(done ? initial.place : null);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState(null);
   const minuteRef = useRef(null);
@@ -161,7 +168,7 @@ export default function DateInvite() {
               </label>
             </div>
             <p className={styles.hint}>
-              Jak nie wiesz jeszcze o której, wybierz cokolwiek. Dogadamy.
+              Jak nie wiesz jeszcze o której, wpisz cokolwiek. Dogadamy.
             </p>
           </>
         )}

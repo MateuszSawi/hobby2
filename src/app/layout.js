@@ -26,17 +26,17 @@ const siteUrl =
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: '????',
-  description: 'Małe zaproszenie.',
+  description: '????',
   openGraph: {
     title: '????',
-    description: 'Małe zaproszenie.',
+    description: '????',
     type: 'website',
     images: [{ url: '/og.jpg', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: '????',
-    description: 'Małe zaproszenie.',
+    description: '????',
     images: ['/og.jpg'],
   },
 };

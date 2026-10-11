@@ -95,3 +95,54 @@
     color: $color-accent;
   }
 }
+
+// Podsumowanie aktualnego wyboru
+.summary {
+  display: grid;
+  gap: $space-sm;
+  margin-bottom: $space-lg;
+  padding: $space-md $space-lg;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-left: 4px solid $color-accent;
+  border-radius: $radius;
+}
+
+.summaryRow {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: $space-md;
+  align-items: baseline;
+
+  dt {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $color-text-muted;
+  }
+
+  dd {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+}
+
+.summaryTitle {
+  font-weight: 500;
+  font-size: 1.3rem;
+  margin-bottom: $space-xs;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  border: 1px solid $color-border;
+  color: $color-text-muted;
+}
+
+.badgeDone {
+  border-color: $color-accent;
+  color: $color-accent;
+}

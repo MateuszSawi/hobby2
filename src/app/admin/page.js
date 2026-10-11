@@ -6,7 +6,7 @@ import styles from './page.module.scss';
 export const dynamic = 'force-dynamic';
 
 export const metadata = {
-  title: 'Odpowiedzi',
+  title: 'Admin',
   robots: { index: false, follow: false },
 };
 
@@ -31,20 +31,22 @@ function formatDate(iso) {
   });
 }
 
-export default async function ResponsesPage() {
+export default async function AdminPage() {
   const supabase = await createClient();
   const { data: rows, error } = await supabase
     .from('date_responses')
     .select('*')
-    .order('created_at', { ascending: false });
+    .order('updated_at', { ascending: false });
+
+  const current = rows?.[0];
 
   return (
     <main className={styles.main}>
       <header className={styles.header}>
         <div>
-          <h1 className={styles.title}>Odpowiedzi</h1>
+          <h1 className={styles.title}>Admin</h1>
           <p className={styles.muted}>
-            zapisanych: {rows?.length ?? 0} · <Link href="/">otwórz zaproszenie</Link>
+            <Link href="/">otwórz zaproszenie</Link>
           </p>
         </div>
         {rows?.length > 0 && (
@@ -64,8 +66,47 @@ export default async function ResponsesPage() {
         </p>
       )}
 
-      {!error && rows?.length === 0 && (
-        <p className={styles.muted}>Brak odpowiedzi.</p>
+      {!error && !current && (
+        <p className={styles.muted}>Jeszcze nic nie wybrała.</p>
+      )}
+
+      {current && (
+        <section className={styles.summary} aria-labelledby="summary-title">
+          <h2 id="summary-title" className={styles.summaryTitle}>
+            Jej wybory{' '}
+            <span
+              className={`${styles.badge} ${current.completed ? styles.badgeDone : ''}`}
+            >
+              {current.completed ? 'ukończone' : 'w trakcie'}
+            </span>
+          </h2>
+          <dl>
+            <div className={styles.summaryRow}>
+              <dt>Dzień</dt>
+              <dd>{label(current.day)}</dd>
+            </div>
+            <div className={styles.summaryRow}>
+              <dt>Godzina</dt>
+              <dd>{current.time || '—'}</dd>
+            </div>
+            <div className={styles.summaryRow}>
+              <dt>Vibe</dt>
+              <dd>{label(current.vibe)}</dd>
+            </div>
+            <div className={styles.summaryRow}>
+              <dt>Miejsce</dt>
+              <dd>{current.place || '—'}</dd>
+            </div>
+            <div className={styles.summaryRow}>
+              <dt>Zaczęła</dt>
+              <dd>{formatDate(current.created_at)}</dd>
+            </div>
+            <div className={styles.summaryRow}>
+              <dt>Ostatnia zmiana</dt>
+              <dd>{formatDate(current.updated_at)}</dd>
+            </div>
+          </dl>
+        </section>
       )}
 
       {rows?.length > 0 && (
@@ -73,7 +114,7 @@ export default async function ResponsesPage() {
           <table className={styles.table}>
             <thead>
               <tr>
-                <th>Kiedy</th>
+                <th>Ostatnia zmiana</th>
                 <th>Dzień</th>
                 <th>Godzina</th>
                 <th>Vibe</th>
@@ -85,7 +126,7 @@ export default async function ResponsesPage() {
             <tbody>
               {rows.map((r) => (
                 <tr key={r.id}>
-                  <td className={styles.nowrap}>{formatDate(r.created_at)}</td>
+                  <td className={styles.nowrap}>{formatDate(r.updated_at)}</td>
                   <td>{label(r.day)}</td>
                   <td>{r.time || '—'}</td>
                   <td>{label(r.vibe)}</td>

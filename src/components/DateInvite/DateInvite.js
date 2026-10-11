@@ -18,6 +18,9 @@ const VIBES = [
 const PLACE_OPTION =
   'Nie powiem Ci. To Twoje zadanie zaplanować randkę, i lepiej się kurwa postaraj.';
 
+// W bazie jest zawsze jeden wiersz o stałym id - każdy zapis go nadpisuje.
+const RESPONSE_ID = '00000000-0000-0000-0000-000000000001';
+
 // 1 intro, 2 dzień, 3 godzina, 4 vibe, 5 miejsce, 6 koniec
 const TOTAL_STEPS = 6;
 const FIRST_QUESTION = 2;
@@ -36,7 +39,6 @@ export default function DateInvite() {
   const [place, setPlace] = useState(null);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState(null);
-  const idRef = useRef(null);
   const minuteRef = useRef(null);
 
   const timeValue =
@@ -56,10 +58,9 @@ export default function DateInvite() {
     setSaving(true);
     setSaveError(null);
     try {
-      if (!idRef.current) idRef.current = crypto.randomUUID();
       const supabase = createClient();
       const { error } = await supabase.from('date_responses').upsert({
-        id: idRef.current,
+        id: RESPONSE_ID,
         day,
         time: timeValue,
         vibe,
@@ -84,14 +85,24 @@ export default function DateInvite() {
     setStep((s) => Math.max(s - 1, 1));
   }
 
-  function restart() {
-    idRef.current = null;
+  // Tylko do testów: czyści tabelę, żeby zawsze był co najwyżej jeden wiersz.
+  async function restart() {
+    setSaveError(null);
+    try {
+      const supabase = createClient();
+      const { error } = await supabase
+        .from('date_responses')
+        .delete()
+        .not('id', 'is', null);
+      if (error) throw error;
+    } catch (err) {
+      setSaveError(err?.message || 'Nie udało się wyczyścić.');
+    }
     setDay(null);
     setHour('');
     setMinute('');
     setVibe(null);
     setPlace(null);
-    setSaveError(null);
     setStep(1);
   }
 

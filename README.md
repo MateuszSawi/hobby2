@@ -8,7 +8,7 @@ Stack: Next.js 15 (App Router), czysty JavaScript, SCSS Modules.
     npm install
     npm run dev          # http://localhost:3000
 
-W .env.local musza byc:
+W .env (commitowany, klucz anon jest publiczny) sa:
 
     NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
     NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
@@ -21,9 +21,9 @@ zapisywac i usuwac (aplikacja nie ma logowania).
 
 ## Strony
 
-- /            - zaproszenie (slajdy). Odpowiedz zapisuje sie po kazdym kroku (upsert po id),
-                 wiec w tabeli widac tez niedokonczone odpowiedzi.
-- /responses   - podglad wszystkich odpowiedzi, usuwanie pojedynczo i "Clear all" (do testow).
+- /            - zaproszenie (slajdy). W bazie jest zawsze jeden wiersz o stalym id,
+                 nadpisywany po kazdym kroku. "Zacznij od nowa" (tylko do testow) czysci tabele.
+- /admin       - podsumowanie wyborow + tabela wierszy, usuwanie i "Wyczysc wszystko".
 
 ## Struktura
 
@@ -31,7 +31,7 @@ zapisywac i usuwac (aplikacja nie ma logowania).
       app/
         layout.js                 # fonty Google (Cormorant Garamond, Parisienne), globals.scss
         page.js                   # strona glowna -> DateInvite
-        responses/                # podglad i czyszczenie odpowiedzi (server actions)
+        admin/                    # podsumowanie wyborow, czyszczenie (server actions)
       components/DateInvite/      # logika slajdow + style
       lib/supabase/client.js      # klient do komponentow 'use client'
       lib/supabase/server.js      # klient do Server Components / Actions

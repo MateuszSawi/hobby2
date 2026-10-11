@@ -114,7 +114,7 @@ export default function DateInvite() {
             <h1 className={`${styles.title} ${styles.titleSmall}`}>
               Nie rozmyśliłem się.
               <br />
-              Wychodzisz ze mną na randkę.
+              Idziesz ze mną na randkę.
               <br />
               Ale kiedy?
             </h1>

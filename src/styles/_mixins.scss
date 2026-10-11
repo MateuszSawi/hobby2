@@ -1,0 +1,5 @@
+@use 'variables' as *;
+
+@mixin respond-sm {
+  @media (min-width: $bp-sm) { @content; }
+}

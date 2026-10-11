@@ -1,0 +1,97 @@
+@use 'variables' as *;
+
+.main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: $space-lg $space-md;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $space-md;
+  margin-bottom: $space-lg;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+.muted {
+  color: $color-text-muted;
+  font-style: italic;
+}
+
+.danger {
+  padding: 0.5rem 1rem;
+  border: 1px solid $color-accent;
+  border-radius: $radius;
+  color: $color-accent;
+  transition: background $transition, color $transition;
+
+  &:hover {
+    background: $color-accent;
+    color: $color-surface;
+  }
+}
+
+.error {
+  padding: $space-md;
+  border: 1px solid $color-accent;
+  border-radius: $radius;
+  color: $color-accent;
+  background: $color-accent-soft;
+}
+
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  background: $color-surface;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+
+  th,
+  td {
+    padding: 0.7rem 0.9rem;
+    text-align: left;
+    border-bottom: 1px solid $color-border;
+    vertical-align: top;
+  }
+
+  th {
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-text-muted;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.place {
+  max-width: 260px;
+}
+
+.linkButton {
+  color: $color-text-muted;
+  font-style: italic;
+
+  &:hover {
+    color: $color-accent;
+  }
+}
